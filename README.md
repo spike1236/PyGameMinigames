@@ -1,2 +1,2 @@
 # PyGame_Minigames
-Different minigames writed with pygame
+Different minigames written with pygame
