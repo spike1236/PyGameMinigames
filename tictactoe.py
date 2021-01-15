@@ -13,8 +13,7 @@ COLORS = {
 }
 
 WIDTH, HEIGHT = (600, 600)
-SIZE = (WIDTH, HEIGHT)
-WINDOW = pygame.display.set_mode(SIZE)
+WINDOW = pygame.display.set_mode((WIDTH, HEIGHT))
 
 
 # Класс, необходимый для проверки ходов и победителя
@@ -77,10 +76,9 @@ class Field:
         self.width = WIDTH
         self.height = HEIGHT
         self.color = COLORS['white']
-        self.game = Checker()
+        self.checker = Checker()
         self.winner = None
         self.font = 'consolas'
-        self.font_name = pygame.font.match_font(self.font, 1)
 
     # рисование игрового поля
     def draw_board(self):
@@ -109,13 +107,13 @@ class Field:
         if 400 < x < 600:
             j = 2
         if i != -1 and j != -1:
-            if self.game.is_valid_move(i, j) and self.game.check_for_winner() is None:
+            if self.checker.is_valid_move(i, j) and self.checker.check_for_winner() is None:
                 pygame.draw.rect(self.surface, (16, 204, 184), self.SQUARES[i][j])
             return self.SQUARES[i][j], (i, j)
 
     # написание текста в окне
     def draw_text(self, text, size, color, x, y):
-        font = pygame.font.Font(self.font_name, size)
+        font = pygame.font.Font(pygame.font.match_font(self.font, 1), size)
         text_surface = font.render(text, True, color)
         text_rect = text_surface.get_rect()
         text_rect.center = (x, y)
@@ -125,7 +123,7 @@ class Field:
     def draw_field(self):
         for i in range(3):
             for j in range(3):
-                player = self.game.field[i][j]
+                player = self.checker.field[i][j]
                 if player != 0:
                     square = self.SQUARES[i][j]
                     x, y = square[0] + 100, square[1] + 100
@@ -138,8 +136,8 @@ class Field:
 
     # рисование линии, по которой игрок победил
     def draw_winning_line(self):
-        if self.game.check_for_winner() is not None and self.game.check_for_winner() != 'tie':
-            line, place = self.game.winning_line
+        if self.checker.check_for_winner() is not None and self.checker.check_for_winner() != 'tie':
+            line, place = self.checker.winning_line
             end_col = (COLORS['X_color'] if self.winner == 1 else COLORS['O_color'])
             if line == 'row':
                 y = (place * 200) + 100
@@ -158,13 +156,13 @@ class Field:
     # функция для хода
     def make_move(self):
         return_val = self.get_square()
-        if return_val is not None and self.game.check_for_winner() is None:
+        if return_val is not None and self.checker.check_for_winner() is None:
             active_square, (i, j) = return_val
-            self.game.make_move(i, j)
+            self.checker.make_move(i, j)
 
     # объявление о победителе
     def winner_announcement(self):
-        self.winner = self.game.check_for_winner()
+        self.winner = self.checker.check_for_winner()
         if self.winner:
             color = COLORS['green']
             if self.winner == 'tie':
@@ -178,8 +176,8 @@ class Field:
 
     # удаление старого чекера и создание нового
     def reset(self):
-        del self.game
-        self.game = Checker()
+        del self.checker
+        self.checker = Checker()
 
 
 # основной код
@@ -187,25 +185,25 @@ if __name__ == '__main__':
     pygame.init()
     pygame.display.set_caption('Tic Tac Toe')
     clock = pygame.time.Clock()
-    grid = Field()
+    field = Field()
     started = 0
     while True:
         if started:
             clock.tick(30)
         started = 1
-        grid.draw_board()
-        grid.get_square()
-        grid.draw_field()
-        grid.draw_winning_line()
-        grid.winner_announcement()
+        field.draw_board()
+        field.get_square()
+        field.draw_field()
+        field.draw_winning_line()
+        field.winner_announcement()
         for event in pygame.event.get():
             if event.type == pygame.QUIT or (event.type == pygame.KEYDOWN and
                                              event.key == pygame.K_ESCAPE):
                 pygame.quit()
                 exit(0)
             if event.type == pygame.MOUSEBUTTONUP:
-                grid.make_move()
-                grid.draw_field()
+                field.make_move()
+                field.draw_field()
             if event.type == pygame.KEYDOWN and event.key == pygame.K_RETURN:
-                grid.reset()
+                field.reset()
         pygame.display.flip()
