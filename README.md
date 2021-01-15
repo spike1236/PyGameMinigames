@@ -15,6 +15,9 @@ Our project provides you with 3 popular games written only in python language us
 
 ![](images/tetris_im.png)
 
+## Technologies
+To create this project following libraries following technologies were used:
+* [Pygame](https://www.pygame.org/)
 
 ## Authors
 
