@@ -1,21 +1,26 @@
-# # PyGame_Minigames
+# PyGame_Minigames
 Our project provides you with 3 popular games written only in python language using pygame library
 
 ![](images/main_menu.png)
 
-# 1. Tic-Tac-Toe
+## 1. Tic-Tac-Toe
 
 ![](images/tic_tac_toe_im.png)
 
-# 2. Snake
+## 2. Snake
 
 ![](images/snake_im.png)
 
-# 3. Tetris
+## 3. Tetris
 
 ![](images/tetris_im.png)
 
 
 
+## We are very grateful that you have visited our project and we will be very glad if you try to play our games!
 
-# We are very grateful that you have visited our project and we will be very glad if you try to play our games!
+
+## Authors
+* **Rakhmetulla Akram** - [spike1236](https://github.com/spike1236)
+* **Marat Daniel** - [MaratDaniel](https://github.com/maratdaniel)
+* **Baimagambetov Beksultan** - [BeksultanBaimagambetov](https://github.com/beksultanbaimagambetov)
