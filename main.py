@@ -1,5 +1,6 @@
 import pygame
 
+# выбор игры (главное меню)
 WINDOW = pygame.display.set_mode((660, 300))
 pygame.display.set_caption('Главное меню')
 
@@ -83,6 +84,7 @@ while True:
     if selected:
         break
 if selected == 1:
+    # выбрана игра "крестики-нолики"
     import tictactoe
     WINDOW = pygame.display.set_mode((tictactoe.WIDTH, tictactoe.HEIGHT))
     pygame.display.set_caption('Tic Tac Toe')
@@ -111,7 +113,9 @@ if selected == 1:
         pygame.display.flip()
 
 if selected == 2:
+    # выбрана игра "змейка"
     import random
+    # константы
     block_size = 20
     header_margin = 80
     frame_color = (0, 255, 200)
@@ -125,7 +129,7 @@ if selected == 2:
     size = [block_size * blocks_number + 2 * block_size + margin * blocks_number,
             block_size * blocks_number + 2 * block_size + margin * blocks_number + header_margin]
 
-
+    # основной код игры
     class SnakeBlock:
         def __init__(self, x, y):
             self.x = x
@@ -223,20 +227,21 @@ if selected == 2:
         timer.tick(3 + snake_speed)
 
 if selected == 3:
+    # выбрана игра "тетрис"
     import random
     import pygame
 
-    # GLOBALS VARS
+    # константы
     s_width = 800
     s_height = 700
-    p_width = 300  # meaning 300 // 10 = 30 width per block
-    p_height = 600  # meaning 600 // 20 = 30 height per block
+    p_width = 300
+    p_height = 600
     block_size = 30
 
     top_left_x = (s_width - p_width) // 2
     top_left_y = s_height - p_height
 
-    # SHAPE FORMATS
+    # фигуры
     Tshape = [['.....',
                '..0..',
                '.000.',
@@ -342,8 +347,9 @@ if selected == 3:
     shapes = [Sshape, Zshape, Ishape, Oshape, Jshape, Lshape, Tshape]
     shape_colors = [(0, 255, 0), (255, 0, 0), (0, 255, 255), (255, 255, 0), (255, 165, 0), (0, 0, 255), (128, 0, 128)]
 
-    # index 0 - 6 represent shape
+    # индексы 0 - 6 описывают фигуру
 
+    # основной код
     class Piece:
         def __init__(self, x, y, shape):
             self.x = x
