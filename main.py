@@ -1,6 +1,7 @@
 import pygame
 
 WINDOW = pygame.display.set_mode((660, 300))
+pygame.display.set_caption('Главное меню')
 
 
 def RESET_WINDOW():
